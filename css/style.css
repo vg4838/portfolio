@@ -860,6 +860,8 @@ header h1{
 /*Profile pic*/
 .profilepic{
   border-radius: 50%;
+  width: 200px;
+  height:200px;
 }
 .about-heading{
   padding: 10px;
