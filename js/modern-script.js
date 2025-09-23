@@ -583,9 +583,10 @@ window.addEventListener('scroll', throttledScrollHandler);
 function preloadImages() {
     const criticalImages = [
         'img/vivek_profile.jpg',
-        'img/portfolio/crwn.png',
         'img/portfolio/covid19.png',
-        'img/portfolio/review.png'
+        'img/portfolio/review.png',
+        'img/portfolio/movie.png',
+        'img/portfolio/eda.png'
     ];
     
     criticalImages.forEach(src => {

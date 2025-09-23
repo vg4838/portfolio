@@ -48,7 +48,7 @@ class PortfolioLoader {
                 "name": "Vivek Gupta",
                 "title": "Full Stack Software Developer",
                 "tagline": "Bringing together code, creativity, and AI to turn ideas into impact.",
-                "profileImage": "img/professional-developer.jpg"
+                "profileImage": "img/about.jpeg"
             },
             "about": {
                 "story": "I'm a full-stack developer with over 6 years of experience building enterprise-grade systems and intuitive user experiences. What drew me to tech wasn't just curiosity—it was the opportunity to build tools that solve real problems at scale.\n\nSince then, I've gone from late-night side projects to architecting platforms used by millions. I work across the stack, from designing reliable backend systems to crafting responsive, user-friendly interfaces. I enjoy turning complex challenges into clean, scalable solutions.\n\nLately, I've been integrating generative AI into my workflow—not just for boilerplate, but to accelerate architecture decisions, scaffold features, refactor legacy code, and explore alternative implementations. Tools powered by LLMs and agentic systems have become part of my creative process, helping me prototype faster and focus on high-leverage engineering work.\n\nI'm always learning, always building, and always looking for better ways to create meaningful, lasting software.",
