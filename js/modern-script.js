@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeLoader();
     initializeNavigation();
     initializeAnimations();
+    initializeCodeEditor();
     initializeSkillBars();
     initializeCounters();
     initializeContactForm();
@@ -109,28 +110,7 @@ function initializeAnimations() {
         });
     }
 
-    // Typing animation for hero subtitle
-    const heroSubtitle = document.querySelector('.hero-subtitle');
-    if (heroSubtitle) {
-        const text = heroSubtitle.textContent;
-        heroSubtitle.textContent = '';
-        heroSubtitle.style.borderRight = '2px solid #00D4FF';
-        
-        let i = 0;
-        const typeWriter = () => {
-            if (i < text.length) {
-                heroSubtitle.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
-            } else {
-                setTimeout(() => {
-                    heroSubtitle.style.borderRight = 'none';
-                }, 1000);
-            }
-        };
-        
-        setTimeout(typeWriter, 2000);
-    }
+    // Typing animation is now handled by portfolio-loader.js
 
     // Floating elements animation
     const floatingElements = document.querySelectorAll('.floating-element');
@@ -143,6 +123,193 @@ function initializeAnimations() {
             element.style.transform = `translateY(${Math.sin(position) * 20}px) rotate(${position * 2}deg)`;
         }, 50);
     });
+}
+
+// Code Editor Animation
+function initializeCodeEditor() {
+    const manualLines = document.querySelectorAll('.manual-phase');
+    const terminalPrompt = document.getElementById('terminal-prompt');
+    const aiLines = document.querySelectorAll('.ai-phase');
+    const developerName = document.getElementById('developer-name');
+    
+    if (manualLines.length === 0) return;
+    
+    // Store original text content for looping
+    manualLines.forEach(line => {
+        if (!line.getAttribute('data-original-text')) {
+            line.setAttribute('data-original-text', line.innerHTML);
+        }
+    });
+    
+    // Start animation after a delay
+    setTimeout(() => {
+        animateManualCoding(manualLines, terminalPrompt, aiLines, developerName);
+    }, 1500);
+}
+
+function animateManualCoding(manualLines, terminalPrompt, aiLines, developerName) {
+    let currentLine = 0;
+    
+    function typeNextManualLine() {
+        if (currentLine >= manualLines.length) {
+            // Manual coding complete, show terminal prompt quickly
+            setTimeout(() => {
+                showTerminalPrompt(terminalPrompt, aiLines, developerName);
+            }, 300);
+            return;
+        }
+        
+        const line = manualLines[currentLine];
+        const text = line.innerHTML;
+        
+        // Clear the line and add typing class
+        line.innerHTML = '';
+        line.classList.add('typing');
+        line.style.display = 'block';
+        line.style.opacity = '1';
+        
+        // Type out the line character by character
+        let charIndex = 0;
+        const typeChar = () => {
+            if (charIndex < text.length) {
+                // Handle HTML tags properly
+                if (text[charIndex] === '<') {
+                    const tagEnd = text.indexOf('>', charIndex);
+                    if (tagEnd !== -1) {
+                        line.innerHTML += text.substring(charIndex, tagEnd + 1);
+                        charIndex = tagEnd + 1;
+                    } else {
+                        line.innerHTML += text[charIndex];
+                        charIndex++;
+                    }
+                } else {
+                    line.innerHTML += text[charIndex];
+                    charIndex++;
+                }
+                
+                // Much faster typing to reach 3 seconds total
+                const delay = Math.random() * 30 + 20; // 20-50ms (much faster)
+                setTimeout(typeChar, delay);
+            } else {
+                // Line complete
+                line.classList.remove('typing');
+                line.classList.add('complete');
+                
+                // Move to next line quickly
+                setTimeout(() => {
+                    currentLine++;
+                    typeNextManualLine();
+                }, Math.random() * 200 + 100); // 100-300ms (much faster)
+            }
+        };
+        
+        typeChar();
+    }
+    
+    typeNextManualLine();
+}
+
+function showTerminalPrompt(terminalPrompt, aiLines, developerName) {
+    // Fade out and completely hide manual lines first
+    const manualLines = document.querySelectorAll('.manual-phase');
+    manualLines.forEach(line => {
+        line.style.animation = 'fadeOut 0.5s ease-out forwards';
+    });
+    
+    // Show terminal prompt and completely remove manual lines after fade
+    setTimeout(() => {
+        // Completely hide manual lines
+        manualLines.forEach(line => {
+            line.style.display = 'none';
+            line.style.opacity = '0';
+            line.classList.remove('typing', 'complete');
+        });
+        
+        terminalPrompt.classList.add('show');
+        
+        // Start AI code generation after prompt is shown and manual lines are cleared
+        setTimeout(() => {
+            // Hide the terminal prompt before showing AI lines
+            terminalPrompt.classList.remove('show');
+            terminalPrompt.style.opacity = '0';
+            
+            // Start AI generation after prompt is hidden
+            setTimeout(() => {
+                animateAIGeneration(aiLines, developerName);
+            }, 300);
+        }, 5000); // Changed from 1500ms to 5000ms (5 seconds)
+    }, 600);
+}
+
+function animateAIGeneration(aiLines, developerName) {
+    let currentLine = 0;
+    
+    function showNextAILine() {
+        if (currentLine >= aiLines.length) {
+            // All AI lines shown, show developer name briefly then restart
+            setTimeout(() => {
+                if (developerName) {
+                    developerName.classList.add('show');
+                }
+                
+                // Start the loop restart after showing developer name
+                setTimeout(() => {
+                    restartAnimation();
+                }, 2000); // Show developer name for 2 seconds
+            }, 800);
+            return;
+        }
+        
+        const line = aiLines[currentLine];
+        
+        // Show line with rapid typing effect
+        line.classList.add('rapid-type');
+        line.style.opacity = '1';
+        
+        // Move to next line quickly (simulating AI speed)
+        setTimeout(() => {
+            currentLine++;
+            showNextAILine();
+        }, Math.random() * 200 + 100); // 100-300ms (much faster than manual)
+    }
+    
+    showNextAILine();
+}
+
+function restartAnimation() {
+    // Reset all elements to initial state
+    const manualLines = document.querySelectorAll('.manual-phase');
+    const terminalPrompt = document.getElementById('terminal-prompt');
+    const aiLines = document.querySelectorAll('.ai-phase');
+    const developerName = document.getElementById('developer-name');
+    
+    // Hide and reset all elements
+    manualLines.forEach(line => {
+        line.style.display = 'none';
+        line.style.opacity = '0';
+        line.classList.remove('typing', 'complete');
+        line.innerHTML = line.getAttribute('data-original-text') || line.innerHTML;
+    });
+    
+    aiLines.forEach(line => {
+        line.classList.remove('rapid-type');
+        line.style.opacity = '0';
+        line.style.display = 'none';
+    });
+    
+    if (terminalPrompt) {
+        terminalPrompt.classList.remove('show');
+        terminalPrompt.style.opacity = '0';
+    }
+    
+    if (developerName) {
+        developerName.classList.remove('show');
+    }
+    
+    // Restart the animation after a brief pause
+    setTimeout(() => {
+        animateManualCoding(manualLines, terminalPrompt, aiLines, developerName);
+    }, 1000);
 }
 
 // Skill Bars Animation
@@ -458,7 +625,7 @@ window.addEventListener('error', function(e) {
 // Console welcome message
 console.log(`
 🚀 Welcome to Vivek Gupta's Portfolio!
-💼 Software Engineer at Amazon
+💼 Full Stack Software Developer at Amazon
 🔧 Built with modern web technologies
 📧 Contact: vg4838@g.rit.edu
 🔗 LinkedIn: https://www.linkedin.com/in/vg0708/

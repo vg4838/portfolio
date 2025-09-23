@@ -1,20 +1,20 @@
 {
   "hero": {
     "name": "Vivek Gupta",
-    "title": "Software Engineer",
-    "tagline": "Building scalable systems with Java, Python, React & AI where innovation meets intelligent automation",
-    "profileImage": "img/professional-developer.jpg"
+    "title": "Full Stack Software Developer",
+    "tagline": "Bringing together code, creativity, and AI to turn ideas into impact.",
+    "profileImage": "img/about.jpeg"
   },
   "about": {
-    "story": "As a Full-Stack Engineer with AI expertise, I bridge the gap between traditional software development and intelligent automation. My journey spans 6+ years architecting enterprise solutions that serve millions of users at companies like Amazon, where I've built ML-powered recommendation engines and scalable backend systems.\n\nWhat sets me apart is my ability to seamlessly integrate cutting-edge AI technologies into production environments. From developing data science platforms at Rochester Institute of Technology to optimizing automation frameworks at BNP Paribas, I've consistently delivered solutions that combine robust engineering principles with innovative AI capabilities.\n\nCurrently, I'm passionate about leveraging Large Language Models and AI tools like Kiro and Claude to transform software development workflows. I believe the future lies in human-AI collaboration, where intelligent systems amplify our creativity and solve complex problems at unprecedented scale.",
+    "story": "I'm a full-stack developer with over 6 years of experience building enterprise-grade systems and intuitive user experiences. What drew me to tech wasn't just curiosity—it was the opportunity to build tools that solve real problems at scale.\n\nSince then, I've gone from late-night side projects to architecting platforms used by millions. I work across the stack, from designing reliable backend systems to crafting responsive, user-friendly interfaces. I enjoy turning complex challenges into clean, scalable solutions.\n\nLately, I've been integrating generative AI into my workflow—not just for boilerplate, but to accelerate architecture decisions, scaffold features, refactor legacy code, and explore alternative implementations. Tools powered by LLMs and agentic systems have become part of my creative process, helping me prototype faster and focus on high-leverage engineering work.\n\nI'm always learning, always building, and always looking for better ways to create meaningful, lasting software.",
     "resumeLink": "assets/Vivek_Gupta_Resume.pdf",
-    "profileImage": "img/about.jpeg"
+    "profileImage": "img/ProfilePic.jpg"
   },
   "experience": [
     {
       "company": "Amazon",
       "period": "2022-Present",
-      "description": "Built end-to-end scalable features with AWS services, improved recommendation algorithms for series use cases",
+      "description": "Enhanced recommendation strategies for book series use cases and launched end-to-end features including bulk book purchasing and audiobook purchase capabilities on series pages.",
       "links": [
         {
           "title": "Book Recommendations",
@@ -29,7 +29,7 @@
     {
       "company": "Skillz",
       "period": "2021",
-      "description": "Developed core features for competitive mobile gaming platform's developer console including analytics dashboards, learning center, and RBAC systems",
+      "description": "Developed core features for competitive mobile gaming platform's developer console including analytics dashboards, learning center, and Role-Based Access Control (RBAC) systems",
       "links": [
         {
           "title": "Developer Console",
@@ -38,37 +38,25 @@
       ]
     },
     {
-      "company": "Rochester Institute of Technology",
-      "period": "2021-2024",
-      "description": "Built web-based data science learning platform enabling non-technical users to perform data mining tasks without coding",
-      "links": []
-    },
-    {
       "company": "Datacore Software",
       "period": "2021",
       "description": "Built ETL pipelines and analytics dashboards for enterprise bug tracking systems",
       "links": []
     },
     {
+      "company": "Rochester Institute of Technology",
+      "period": "2021",
+      "description": "Built web-based data science learning platform enabling non-technical users to perform data mining tasks without coding",
+      "links": []
+    },
+    {
       "company": "BNP Paribas",
       "period": "2016-2019",
-      "description": "Optimized automation testing frameworks and developed reusable API libraries",
+      "description": "Optimized automation testing frameworks and developed reusable java API libraries",
       "links": []
     }
   ],
   "projects": [
-    {
-      "id": "bnge-movies",
-      "title": "BNGE-MOVIES",
-      "description": "A React and Redux app deployed on AWS using Terraform, integrated with CircleCI for CI/CD tasks and dockerized. Features Netflix-like movie browsing interface.",
-      "technologies": ["React", "Redux", "Docker", "CircleCI", "Terraform", "AWS CloudFront", "S3", "Slack Integration"],
-      "image": "img/portfolio/movie.png",
-      "thumbnail": "img/portfolio/thumbnails/movie-square.png",
-      "liveDemo": "https://d10jggv8zyjv7v.cloudfront.net/",
-      "github": "https://github.com/vg4838/bnge-watch",
-      "certificate": "assets/circleci_certificate.jpg",
-      "category": "web"
-    },
     {
       "id": "crwn-clothing",
       "title": "CRWN-CLOTHING",
@@ -79,6 +67,18 @@
       "liveDemo": "https://crwn-clothing-hub.herokuapp.com/",
       "github": "https://github.com/vg4838/crwn-clothing",
       "certificate": "https://udemy-certificate.s3.amazonaws.com/image/UC-23bbf909-b324-44d3-823b-0443dc752a92.jpg",
+      "category": "web"
+    },
+    {
+      "id": "bnge-movies",
+      "title": "BNGE-MOVIES",
+      "description": "A React and Redux app deployed on AWS using Terraform, integrated with CircleCI for CI/CD tasks and dockerized. Features Netflix-like movie browsing interface.",
+      "technologies": ["React", "Redux", "Docker", "CircleCI", "Terraform", "AWS CloudFront", "S3", "Slack Integration"],
+      "image": "img/portfolio/movie.png",
+      "thumbnail": "img/portfolio/thumbnails/movie-square.png",
+      "liveDemo": "https://d10jggv8zyjv7v.cloudfront.net/",
+      "github": "https://github.com/vg4838/bnge-watch",
+      "certificate": "assets/circleci_certificate.jpg",
       "category": "web"
     },
     {
@@ -143,19 +143,16 @@
   ],
   "skills": {
     "cloudTechnologies": ["AWS Lambda", "AWS S3", "AWS EC2", "Docker", "Kubernetes", "Terraform", "CircleCI", "Jenkins"],
-    "aiTools": ["Kiro", "Kiro IDE", "Claude", "GPT-4", "GitHub Copilot", "Cursor AI", "Anthropic Claude", "OpenAI API", "Hugging Face", "LangChain", "Vector Databases"],
-    "languages": ["Java", "Python", "JavaScript", "TypeScript", "SQL", "Go", "Scala"],
-    "frontend": ["React", "Redux", "HTML5", "CSS3", "Angular", "Vue.js", "Next.js", "Tailwind CSS"],
-    "backend": ["Node.js", "Flask", "Django", "RESTful APIs", "Spring Boot", "GraphQL", "Microservices", "Stripe API"],
-    "devOps": ["CircleCI", "Jenkins", "GitHub Actions", "GitLab CI", "Ansible", "Prometheus", "Grafana"],
-    "machineLearning": ["TensorFlow", "PyTorch", "Scikit-learn", "Pandas", "NumPy", "Jupyter", "MLflow", "Apache Spark"],
-    "databases": ["PostgreSQL", "MongoDB", "MySQL", "DynamoDB", "Redis", "Elasticsearch", "Cassandra", "Neo4j"]
+    "languages": ["Java", "Python", "JavaScript", "TypeScript", "SQL"],
+    "frontend": ["React", "Redux", "HTML5", "CSS3", "Angular"],
+    "backend": ["Node.js", "Flask", "Django", "RESTful APIs", "Spring Boot", "Stripe API"],
+    "machineLearning": ["TensorFlow", "PyTorch", "Scikit-learn", "Pandas", "NumPy", "Jupyter"],
+    "databases": ["PostgreSQL", "MongoDB", "MySQL", "DynamoDB", "Redis", "Elasticsearch"]
   },
   "contact": {
-    "email": "vg4838@g.rit.edu",
+    "email": "vivekgupta50455@gmail.com",
     "location": "Seattle, WA",
     "linkedin": "https://www.linkedin.com/in/vg0708/",
-    "github": "https://github.com/vg4838/",
-    "instagram": "https://www.instagram.com/vivek2322/"
+    "github": "https://github.com/vg4838/"
   }
 }

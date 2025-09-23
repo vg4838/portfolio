@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Vivek Gupta - Software Engineer at Amazon. Building scalable systems where innovation meets intelligent automation.">
-    <meta name="keywords" content="Software Engineer, Amazon, Full Stack Developer, Python, Java, React, AWS, Machine Learning">
+    <meta name="description" content="Vivek Gupta - Full Stack Software Developer at Amazon. Building scalable systems with Java, Python, React & AI where innovation meets intelligent automation.">
+    <meta name="keywords" content="Full Stack Software Developer, Amazon, Java, Python, React, AWS, Machine Learning, AI">
     <meta name="author" content="Vivek Gupta">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Vivek Gupta - Software Engineer">
-    <meta property="og:description" content="Building scalable systems where innovation meets intelligent automation. Full-stack development with AI integration.">
+    <meta property="og:title" content="Vivek Gupta - Full Stack Software Developer">
+    <meta property="og:description" content="Building scalable systems with Java, Python, React & AI where innovation meets intelligent automation.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://vg4838.github.io/portfolio/">
     
-    <title>Vivek Gupta - Software Engineer</title>
+    <title>Vivek Gupta - Full Stack Software Developer</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,7 +84,7 @@
                     <span class="hero-greeting">Hi, I'm</span>
                     <span class="hero-name" id="hero-name">Vivek Gupta</span>
                 </h1>
-                <h2 class="hero-subtitle" id="hero-title">Software Engineer</h2>
+                <h2 class="hero-subtitle" id="hero-title"></h2>
                 <p class="hero-description">
                     <span id="hero-tagline">Building scalable systems where innovation meets intelligent automation</span>
                 </p>
@@ -96,40 +96,45 @@
                 </div>
             </div>
             <div class="hero-image">
-                <div class="tech-stack-visual">
-                    <div class="tech-grid">
-                        <div class="tech-item" data-tech="Java">
-                            <i class="fab fa-java"></i>
-                            <span>Java</span>
+                <div class="code-editor" id="code-editor">
+                    <div class="editor-header">
+                        <div class="editor-dots">
+                            <div class="editor-dot red"></div>
+                            <div class="editor-dot yellow"></div>
+                            <div class="editor-dot green"></div>
                         </div>
-                        <div class="tech-item" data-tech="Python">
-                            <i class="fab fa-python"></i>
-                            <span>Python</span>
-                        </div>
-                        <div class="tech-item" data-tech="React">
-                            <i class="fab fa-react"></i>
-                            <span>React</span>
-                        </div>
-                        <div class="tech-item" data-tech="AWS">
-                            <i class="fab fa-aws"></i>
-                            <span>AWS</span>
-                        </div>
-                        <div class="tech-item" data-tech="AI">
-                            <i class="fas fa-brain"></i>
-                            <span>AI/ML</span>
-                        </div>
-                        <div class="tech-item" data-tech="Database">
-                            <i class="fas fa-database"></i>
-                            <span>Database</span>
-                        </div>
+                        <div class="editor-tab">main.js</div>
                     </div>
-                    <div class="center-logo">
-                        <div class="logo-circle">
-                            <i class="fas fa-code"></i>
+                    <div class="editor-content">
+                        <!-- Manual coding phase - will be typed and then cleared -->
+                        <div class="code-line manual-phase" id="line1">
+                            <span class="keyword">import</span> <span class="variable">React</span><span class="operator">,</span> <span class="bracket">{</span> <span class="variable">useState</span> <span class="bracket">}</span> <span class="keyword">from</span> <span class="string">'react'</span><span class="operator">;</span>
                         </div>
-                        <div class="pulse-ring"></div>
-                        <div class="pulse-ring delay-1"></div>
-                        <div class="pulse-ring delay-2"></div>
+                        <div class="code-line manual-phase" id="line2">
+                            <span class="keyword">const</span> <span class="function">LoginForm</span> <span class="operator">=</span> <span class="bracket">(</span><span class="bracket">)</span> <span class="operator">=></span> <span class="bracket">{</span>
+                        </div>
+                        <div class="code-line manual-phase" id="line3">
+                            <span class="comment">// This is taking too long...</span>
+                        </div>
+                        
+                        <!-- Terminal prompt phase - shown after manual code is cleared -->
+                        <div class="terminal-prompt" id="terminal-prompt">
+                            <span class="prompt-symbol">$</span> <span class="prompt-text">Prompt: <span class="string">"Generate a responsive login form using React"</span></span>
+                        </div>
+                        
+                        <!-- AI-generated code phase - just a few lines quickly -->
+                        <div class="code-line ai-phase" id="ai-line1">
+                            <span class="keyword">import</span> <span class="variable">React</span><span class="operator">,</span> <span class="bracket">{</span> <span class="variable">useState</span> <span class="bracket">}</span> <span class="keyword">from</span> <span class="string">'react'</span><span class="operator">;</span>
+                        </div>
+                        <div class="code-line ai-phase" id="ai-line2">
+                            <span class="keyword">const</span> <span class="function">LoginForm</span> <span class="operator">=</span> <span class="bracket">(</span><span class="bracket">)</span> <span class="operator">=></span> <span class="bracket">{</span>
+                        </div>
+                        <div class="code-line ai-phase" id="ai-line3">
+                            <span class="keyword">const</span> <span class="bracket">[</span><span class="variable">email</span><span class="operator">,</span> <span class="variable">setEmail</span><span class="bracket">]</span> <span class="operator">=</span> <span class="function">useState</span><span class="bracket">(</span><span class="string">''</span><span class="bracket">)</span><span class="operator">;</span>
+                        </div>
+                        <div class="code-line ai-phase" id="ai-line4">
+                            <span class="keyword">return</span> <span class="bracket">(</span><span class="operator">&lt;</span><span class="variable">form</span><span class="operator">&gt;</span><span class="operator">&lt;</span><span class="variable">input</span><span class="operator">/&gt;</span><span class="operator">&lt;/</span><span class="variable">form</span><span class="operator">&gt;</span><span class="bracket">)</span><span class="operator">;</span> <span class="bracket">}</span>
+                        </div>
                     </div>
                 </div>
             </div>

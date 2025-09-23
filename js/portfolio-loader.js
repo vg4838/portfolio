@@ -28,6 +28,14 @@ class PortfolioLoader {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             this.data = await response.json();
+            
+            // Ensure certifications have category field for filtering
+            if (this.data.certifications) {
+                this.data.certifications = this.data.certifications.map(cert => ({
+                    ...cert,
+                    category: 'certificates'
+                }));
+            }
         } catch (error) {
             console.error('Failed to load external portfolio data:', error);
             throw error;
@@ -38,12 +46,12 @@ class PortfolioLoader {
         return {
             "hero": {
                 "name": "Vivek Gupta",
-                "title": "Software Engineer",
-                "tagline": "Building scalable systems with Java, Python, React & AI where innovation meets intelligent automation",
+                "title": "Full Stack Software Developer",
+                "tagline": "Bringing together code, creativity, and AI to turn ideas into impact.",
                 "profileImage": "img/professional-developer.jpg"
             },
             "about": {
-                "story": "As a Full-Stack Engineer with AI expertise, I bridge the gap between traditional software development and intelligent automation. My journey spans 6+ years of architecting enterprise solutions that serve millions of users, while pioneering the integration of AI technologies into production systems.\n\nI specialize in building end-to-end intelligent applications - from designing ML-powered recommendation engines at Amazon to creating AI-driven developer tools that enhance productivity. My approach combines robust software engineering principles with cutting-edge AI capabilities, ensuring scalable and maintainable solutions.\n\nCurrently, I'm focused on leveraging Large Language Models and AI tools like Kiro and Claude to revolutionize how we build software. I believe the future lies in human-AI collaboration, where intelligent systems amplify our creativity and solve complex problems at unprecedented scale.",
+                "story": "I'm a full-stack developer with over 6 years of experience building enterprise-grade systems and intuitive user experiences. What drew me to tech wasn't just curiosity—it was the opportunity to build tools that solve real problems at scale.\n\nSince then, I've gone from late-night side projects to architecting platforms used by millions. I work across the stack, from designing reliable backend systems to crafting responsive, user-friendly interfaces. I enjoy turning complex challenges into clean, scalable solutions.\n\nLately, I've been integrating generative AI into my workflow—not just for boilerplate, but to accelerate architecture decisions, scaffold features, refactor legacy code, and explore alternative implementations. Tools powered by LLMs and agentic systems have become part of my creative process, helping me prototype faster and focus on high-leverage engineering work.\n\nI'm always learning, always building, and always looking for better ways to create meaningful, lasting software.",
                 "resumeLink": "assets/Vivek_Gupta_Resume.pdf",
                 "profileImage": "img/vivek_profile.jpg"
             },
@@ -51,7 +59,7 @@ class PortfolioLoader {
                 {
                     "company": "Amazon",
                     "period": "2022-Present",
-                    "description": "Built end-to-end scalable features with AWS services, improved recommendation algorithms for series use cases",
+                    "description": "Enhanced recommendation strategies for book series use cases and launched end-to-end features including bulk book purchasing and audiobook purchase capabilities on series pages.",
                     "links": [
                         {
                             "title": "Book Recommendations",
@@ -66,7 +74,7 @@ class PortfolioLoader {
                 {
                     "company": "Skillz",
                     "period": "2021",
-                    "description": "Developed core features for competitive mobile gaming platform's developer console including analytics dashboards, learning center, and RBAC systems",
+                    "description": "Developed core features for competitive mobile gaming platform's developer console including analytics dashboards, learning center, and Role-Based Access Control (RBAC) systems",
                     "links": [
                         {
                             "title": "Developer Console",
@@ -75,37 +83,25 @@ class PortfolioLoader {
                     ]
                 },
                 {
-                    "company": "Rochester Institute of Technology",
-                    "period": "2019-2022",
-                    "description": "Built web-based data science learning platform enabling non-technical users to perform data mining tasks without coding",
-                    "links": []
-                },
-                {
                     "company": "Datacore Software",
                     "period": "2021",
                     "description": "Built ETL pipelines and analytics dashboards for enterprise bug tracking systems",
                     "links": []
                 },
                 {
+                    "company": "Rochester Institute of Technology",
+                    "period": "2021",
+                    "description": "Built web-based data science learning platform enabling non-technical users to perform data mining tasks without coding",
+                    "links": []
+                },
+                {
                     "company": "BNP Paribas",
                     "period": "2016-2019",
-                    "description": "Optimized automation testing frameworks and developed reusable API libraries",
+                    "description": "Optimized automation testing frameworks and developed reusable java API libraries",
                     "links": []
                 }
             ],
             "projects": [
-                {
-                    "id": "bnge-movies",
-                    "title": "BNGE-MOVIES",
-                    "description": "A React and Redux app deployed on AWS using Terraform, integrated with CircleCI for CI/CD tasks and dockerized. Features Netflix-like movie browsing interface.",
-                    "technologies": ["React", "Redux", "Docker", "CircleCI", "Terraform", "AWS CloudFront", "S3", "Slack Integration"],
-                    "image": "img/portfolio/movie.png",
-                    "thumbnail": "img/portfolio/thumbnails/movie-square.png",
-                    "liveDemo": "https://d10jggv8zyjv7v.cloudfront.net/",
-                    "github": "https://github.com/vg4838/bnge-watch",
-                    "certificate": "assets/circleci_certificate.jpg",
-                    "category": "web"
-                },
                 {
                     "id": "crwn-clothing",
                     "title": "CRWN-CLOTHING",
@@ -116,6 +112,18 @@ class PortfolioLoader {
                     "liveDemo": "https://crwn-clothing-hub.herokuapp.com/",
                     "github": "https://github.com/vg4838/crwn-clothing",
                     "certificate": "https://udemy-certificate.s3.amazonaws.com/image/UC-23bbf909-b324-44d3-823b-0443dc752a92.jpg",
+                    "category": "web"
+                },
+                {
+                    "id": "bnge-movies",
+                    "title": "BNGE-MOVIES",
+                    "description": "A React and Redux app deployed on AWS using Terraform, integrated with CircleCI for CI/CD tasks and dockerized. Features Netflix-like movie browsing interface.",
+                    "technologies": ["React", "Redux", "Docker", "CircleCI", "Terraform", "AWS CloudFront", "S3", "Slack Integration"],
+                    "image": "img/portfolio/movie.png",
+                    "thumbnail": "img/portfolio/thumbnails/movie-square.png",
+                    "liveDemo": "https://d10jggv8zyjv7v.cloudfront.net/",
+                    "github": "https://github.com/vg4838/bnge-watch",
+                    "certificate": "assets/circleci_certificate.jpg",
                     "category": "web"
                 },
                 {
@@ -179,19 +187,18 @@ class PortfolioLoader {
                 }
             ],
             "skills": {
+                "cloudTechnologies": ["AWS Lambda", "AWS S3", "AWS EC2", "Docker", "Kubernetes", "Terraform", "CircleCI", "Jenkins"],
                 "languages": ["Java", "Python", "JavaScript", "TypeScript", "SQL"],
                 "frontend": ["React", "Redux", "HTML5", "CSS3", "Angular"],
                 "backend": ["Node.js", "Flask", "Django", "RESTful APIs", "Spring Boot", "Stripe API"],
-                "cloudDevOps": ["AWS Lambda", "AWS S3", "AWS EC2", "Docker", "Kubernetes", "Terraform", "CircleCI", "Jenkins"],
-                "aiMlTools": ["Kiro", "Kiro IDE", "Claude", "TensorFlow", "PyTorch", "Scikit-learn", "Pandas", "NumPy"],
+                "machineLearning": ["TensorFlow", "PyTorch", "Scikit-learn", "Pandas", "NumPy", "Jupyter"],
                 "databases": ["PostgreSQL", "MongoDB", "MySQL", "DynamoDB", "Redis", "Elasticsearch"]
             },
             "contact": {
-                "email": "vg4838@g.rit.edu",
+                "email": "vivekgupta50455@gmail.com",
                 "location": "Seattle, WA",
                 "linkedin": "https://www.linkedin.com/in/vg0708/",
-                "github": "https://github.com/vg4838/",
-                "instagram": "https://www.instagram.com/vivek2322/"
+                "github": "https://github.com/vg4838/"
             }
         };
     }
@@ -224,7 +231,11 @@ class PortfolioLoader {
         const heroTagline = document.getElementById('hero-tagline');
         
         if (heroName) heroName.textContent = hero.name;
-        if (heroTitle) heroTitle.textContent = hero.title;
+        if (heroTitle) {
+            heroTitle.textContent = hero.title;
+            // Trigger typing animation after setting the text
+            this.startTypingAnimation(heroTitle);
+        }
         if (heroTagline) heroTagline.textContent = hero.tagline;
         
         // Set resume links
@@ -233,6 +244,27 @@ class PortfolioLoader {
             resumeBtn.href = this.data.about.resumeLink;
             resumeBtn.download = 'Vivek_Gupta_Resume.pdf';
         }
+    }
+
+    startTypingAnimation(element) {
+        const text = element.textContent;
+        element.textContent = '';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < text.length) {
+                element.innerHTML = text.substring(0, i + 1) + '<span class="typing-cursor">|</span>';
+                i++;
+                setTimeout(typeWriter, 100);
+            } else {
+                element.innerHTML = text;
+                setTimeout(() => {
+                    element.innerHTML = text;
+                }, 1000);
+            }
+        };
+        
+        setTimeout(typeWriter, 2000);
     }
 
     populateAbout() {
@@ -409,39 +441,45 @@ class PortfolioLoader {
         if (skillsGrid) {
             const skillCategories = [
                 { 
+                    title: 'Cloud Technologies', 
+                    icon: 'fas fa-cloud', 
+                    skills: skills.cloudTechnologies,
+                    category: 'cloudTechnologies'
+                },
+                { 
                     title: 'Programming Languages', 
                     icon: 'fas fa-code', 
-                    skills: skills.languages
+                    skills: skills.languages,
+                    category: 'languages'
                 },
                 { 
                     title: 'Frontend Development', 
                     icon: 'fas fa-laptop-code', 
-                    skills: skills.frontend
+                    skills: skills.frontend,
+                    category: 'frontend'
                 },
                 { 
                     title: 'Backend & APIs', 
                     icon: 'fas fa-server', 
-                    skills: skills.backend
+                    skills: skills.backend,
+                    category: 'backend'
                 },
                 { 
-                    title: 'Cloud & DevOps', 
-                    icon: 'fas fa-cloud', 
-                    skills: skills.cloudDevOps || skills.cloudTechnologies || skills.devOps
-                },
-                { 
-                    title: 'AI & ML Tools', 
-                    icon: 'fas fa-brain', 
-                    skills: skills.aiMlTools || skills.aiTools || skills.dataScience
+                    title: 'Machine Learning', 
+                    icon: 'fas fa-robot', 
+                    skills: skills.machineLearning,
+                    category: 'machineLearning'
                 },
                 { 
                     title: 'Databases', 
                     icon: 'fas fa-database', 
-                    skills: skills.databases
+                    skills: skills.databases,
+                    category: 'databases'
                 }
             ];
 
             skillsGrid.innerHTML = skillCategories.map((category, index) => `
-                <div class="skill-category" data-aos="fade-up" data-aos-delay="${index * 100}">
+                <div class="skill-category" data-category="${category.category}" data-aos="fade-up" data-aos-delay="${index * 100}">
                     <div class="category-header">
                         <div class="category-icon">
                             <i class="${category.icon}"></i>
@@ -449,13 +487,94 @@ class PortfolioLoader {
                         <h3>${category.title}</h3>
                     </div>
                     <div class="skills-list">
-                        ${category.skills.map(skill => `
-                            <span class="skill-tag">${skill}</span>
-                        `).join('')}
+                        ${category.skills ? category.skills.map(skill => `
+                            <span class="skill-tag">
+                                ${this.getTechIcon(skill)}
+                                ${skill}
+                            </span>
+                        `).join('') : ''}
                     </div>
                 </div>
             `).join('');
         }
+    }
+
+    getTechIcon(skillName) {
+        // Map skill names to icon file names
+        const iconMap = {
+            // Languages
+            'Java': 'java',
+            'Python': 'python',
+            'JavaScript': 'javascript',
+            'TypeScript': 'typescript',
+            'SQL': 'postgresql', // Using PostgreSQL icon for SQL
+            'Go': 'go',
+            'Scala': 'scala',
+            
+            // Frontend
+            'React': 'react',
+            'Redux': 'redux',
+            'HTML5': 'html5',
+            'CSS3': 'css3',
+            'Angular': 'angular',
+            'Vue.js': 'vuejs',
+            'Next.js': 'nextjs',
+            'Tailwind CSS': 'tailwindcss',
+            
+            // Backend
+            'Node.js': 'nodejs',
+            'Flask': 'flask',
+            'Django': 'django',
+            'Spring Boot': 'spring',
+            'GraphQL': 'graphql',
+            
+            // Cloud Technologies
+            'AWS Lambda': 'aws',
+            'AWS S3': 'aws',
+            'AWS EC2': 'aws',
+            'AWS CloudFormation': 'aws',
+            'AWS RDS': 'aws',
+            'AWS DynamoDB': 'aws',
+            'AWS CloudWatch': 'aws',
+            'AWS API Gateway': 'aws',
+            'Docker': 'docker',
+            'Kubernetes': 'kubernetes',
+            'Terraform': 'terraform',
+            
+            // DevOps
+            'CircleCI': 'circleci',
+            'Jenkins': 'jenkins',
+            'GitHub Actions': 'github',
+            'GitLab CI': 'gitlab',
+            'Ansible': 'ansible',
+            
+            // Machine Learning
+            'TensorFlow': 'tensorflow',
+            'PyTorch': 'pytorch',
+            'Pandas': 'pandas',
+            'NumPy': 'numpy',
+            'Jupyter': 'jupyter',
+            
+            // Databases
+            'PostgreSQL': 'postgresql',
+            'MongoDB': 'mongodb',
+            'MySQL': 'mysql',
+            'Redis': 'redis',
+            'Elasticsearch': 'elasticsearch',
+            
+            // AI Tools
+            'ChatGPT': 'openai',
+            'Claude': 'anthropic',
+            'GPT-4': 'openai',
+            'OpenAI API': 'openai',
+            'Anthropic Claude': 'anthropic'
+        };
+        
+        const iconName = iconMap[skillName];
+        if (iconName) {
+            return `<img src="img/tech-icons/${iconName}.svg" alt="${skillName}" class="tech-icon-small" onerror="this.style.display='none'">`;
+        }
+        return '';
     }
 
     populateContact() {
@@ -477,9 +596,6 @@ class PortfolioLoader {
                 </a>
                 <a href="${contact.github}" class="contact-link" data-tooltip="GitHub" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-github"></i>
-                </a>
-                <a href="${contact.instagram}" class="contact-link" data-tooltip="Instagram" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-instagram"></i>
                 </a>
             `;
         }

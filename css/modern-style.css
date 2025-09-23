@@ -410,170 +410,230 @@ a {
     animation: fadeInRight 1s ease-out 0.4s both;
 }
 
-/* Tech Stack Visual Styles */
-.tech-stack-visual {
-    position: relative;
-    width: 400px;
-    height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.tech-grid {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.tech-item {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-md);
-    background: var(--surface);
+/* Code Editor Animation Styles */
+.code-editor {
+    width: 450px;
+    height: 350px;
+    background: #1e1e1e;
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    border: 2px solid rgba(0, 212, 255, 0.2);
-    transition: var(--transition-normal);
-    animation: techFloat 6s ease-in-out infinite;
-    cursor: pointer;
-}
-
-.tech-item:hover {
-    transform: translateY(-10px) scale(1.1);
-    border-color: var(--secondary-color);
-    box-shadow: var(--shadow-xl), var(--shadow-glow);
-}
-
-.tech-item i {
-    font-size: 2rem;
-    color: var(--secondary-color);
-    transition: var(--transition-normal);
-}
-
-.tech-item span {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.tech-item:hover span {
-    color: var(--text-primary);
-}
-
-/* Position tech items in a circle */
-.tech-item:nth-child(1) {
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    animation-delay: 0s;
-}
-
-.tech-item:nth-child(2) {
-    top: 25%;
-    right: 0;
-    animation-delay: 1s;
-}
-
-.tech-item:nth-child(3) {
-    bottom: 25%;
-    right: 0;
-    animation-delay: 2s;
-}
-
-.tech-item:nth-child(4) {
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    animation-delay: 3s;
-}
-
-.tech-item:nth-child(5) {
-    bottom: 25%;
-    left: 0;
-    animation-delay: 4s;
-}
-
-.tech-item:nth-child(6) {
-    top: 25%;
-    left: 0;
-    animation-delay: 5s;
-}
-
-.center-logo {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-}
-
-.logo-circle {
-    width: 100px;
-    height: 100px;
-    background: var(--gradient-secondary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     box-shadow: var(--shadow-xl);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
-    z-index: 3;
+    overflow: hidden;
+    font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
 }
 
-.logo-circle i {
-    font-size: 2.5rem;
-    color: var(--background-primary);
+.editor-header {
+    height: 35px;
+    background: #2d2d30;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--spacing-md);
+    gap: var(--spacing-xs);
 }
 
-.pulse-ring {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    border: 3px solid var(--secondary-color);
+.editor-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.editor-dot {
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
-    animation: pulse 2s ease-out infinite;
-    opacity: 0.6;
 }
 
-.pulse-ring.delay-1 {
-    animation-delay: 0.5s;
+.editor-dot.red { background: #ff5f56; }
+.editor-dot.yellow { background: #ffbd2e; }
+.editor-dot.green { background: #27ca3f; }
+
+.editor-tab {
+    background: #1e1e1e;
+    color: var(--text-secondary);
+    padding: 6px 12px;
+    border-radius: 4px 4px 0 0;
+    font-size: 0.8rem;
+    margin-left: var(--spacing-md);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: none;
 }
 
-.pulse-ring.delay-2 {
-    animation-delay: 1s;
+.editor-content {
+    padding: var(--spacing-md);
+    height: calc(100% - 35px);
+    position: relative;
+    overflow: hidden;
 }
 
-@keyframes techFloat {
-    0%, 100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-15px);
-    }
+.code-line {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 4px;
+    opacity: 0;
+    white-space: nowrap;
+    position: relative;
 }
 
-@keyframes pulse {
+.code-line.typing {
+    opacity: 1;
+}
+
+.code-line::after {
+    content: '';
+    position: absolute;
+    right: -2px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--secondary-color);
+    animation: blink 1s infinite;
+    opacity: 0;
+}
+
+.code-line.typing::after {
+    opacity: 1;
+}
+
+.code-line.complete::after {
+    display: none;
+}
+
+/* Remove cursor animation for AI phase */
+.ai-phase::after {
+    display: none !important;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Code syntax highlighting */
+.keyword { color: #569cd6; font-weight: 600; }
+.variable { color: #9cdcfe; }
+.string { color: #ce9178; }
+.comment { color: #6a9955; font-style: italic; }
+.function { color: #dcdcaa; }
+.property { color: #92c5f7; }
+.number { color: #b5cea8; }
+.operator { color: #d4d4d4; }
+.bracket { color: #ffd700; }
+
+
+/* Removed line numbers - code lines are now left-aligned */
+.editor-content .code-line {
+    margin-left: 0;
+}
+
+/* Phase-specific styling */
+.manual-phase {
+    opacity: 0 !important;
+    display: none !important;
+}
+
+.manual-phase.typing,
+.manual-phase.complete {
+    opacity: 1 !important;
+    display: block !important;
+}
+
+.terminal-prompt {
+    opacity: 0;
+    margin: var(--spacing-md) 0;
+    margin-left: 0;
+    padding: var(--spacing-sm);
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--secondary-color);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    position: relative;
+}
+
+.terminal-prompt.show {
+    opacity: 1;
+    animation: terminalGlow 0.8s ease-out;
+}
+
+.prompt-symbol {
+    color: var(--secondary-color);
+    font-weight: bold;
+    margin-right: var(--spacing-xs);
+}
+
+.prompt-text {
+    color: #e6e6e6;
+}
+
+.ai-phase {
+    opacity: 0 !important;
+    display: none !important;
+    position: absolute;
+    top: var(--spacing-md);
+    left: var(--spacing-md);
+    right: var(--spacing-md);
+}
+
+.ai-phase.rapid-type {
+    opacity: 1 !important;
+    display: block !important;
+    animation: rapidType 0.1s ease-out;
+    position: absolute;
+}
+
+.ai-phase#ai-line1 { top: calc(var(--spacing-md) + 0px); }
+.ai-phase#ai-line2 { top: calc(var(--spacing-md) + 25.6px); }
+.ai-phase#ai-line3 { top: calc(var(--spacing-md) + 51.2px); }
+.ai-phase#ai-line4 { top: calc(var(--spacing-md) + 76.8px); }
+
+/* Animation keyframes */
+@keyframes terminalGlow {
     0% {
-        transform: scale(1);
-        opacity: 0.6;
-    }
-    50% {
-        transform: scale(1.5);
-        opacity: 0.3;
+        opacity: 0;
+        transform: translateY(10px);
+        box-shadow: none;
     }
     100% {
-        transform: scale(2);
-        opacity: 0;
+        opacity: 1;
+        transform: translateY(0);
+        box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
     }
+}
+
+@keyframes rapidType {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+/* Typing animation keyframes */
+@keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+.typing-text {
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    animation: typewriter 2s steps(40, end);
 }
 
 .profile-container {
@@ -680,12 +740,17 @@ a {
 
 /* Section Styles */
 .section {
-    padding: 5rem 0 5rem 0;
+    padding: 8rem 0;
+    margin-bottom: 2rem;
+}
+
+.section:last-child {
+    margin-bottom: 0;
 }
 
 .section-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
     padding-top: 1rem;
 }
 
@@ -717,7 +782,7 @@ a {
 /* About Section */
 .about {
     background: var(--background-secondary);
-    padding: 5rem 0;
+    padding: 6rem 0;
     position: relative;
     overflow: hidden;
 }
@@ -1077,7 +1142,7 @@ a {
 /* Work Section */
 .work {
     background: var(--background-primary);
-    padding: 5rem 0;
+    padding: 6rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -1271,27 +1336,27 @@ a {
 /* Skills Section */
 .skills {
     background: var(--background-primary);
-    padding: 5rem 0;
+    padding: 6rem 0;
 }
 
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: var(--spacing-md);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
     max-width: 1400px;
     margin: 0 auto;
 }
 
 .skill-category {
     background: var(--surface);
-    padding: var(--spacing-md);
+    padding: var(--spacing-lg);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     transition: var(--transition-normal);
     border: 1px solid rgba(0, 212, 255, 0.1);
     position: relative;
     overflow: hidden;
-    min-height: 180px;
+    min-height: 200px;
 }
 
 .skill-category::before {
@@ -1422,7 +1487,7 @@ a {
 /* Projects Section */
 .projects {
     background: var(--background-secondary);
-    padding: 5rem 0;
+    padding: 6rem 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -1736,7 +1801,7 @@ a {
 /* Contact Section */
 .contact {
     background: var(--background-secondary);
-    padding: 5rem 0;
+    padding: 6rem 0;
 }
 
 .contact-content {
@@ -1942,6 +2007,11 @@ a {
         order: -1;
     }
     
+    .code-editor {
+        width: 400px;
+        height: 300px;
+    }
+    
     .profile-container {
         width: 250px;
         height: 250px;
@@ -2009,6 +2079,21 @@ a {
     
     .hero {
         padding-top: 70px;
+    }
+    
+    .code-editor {
+        width: 350px;
+        height: 280px;
+    }
+    
+    .editor-content .code-line {
+        font-size: 0.8rem;
+        margin-left: 35px;
+    }
+    
+    .line-numbers {
+        width: 30px;
+        font-size: 0.7rem;
     }
     
     .hero-buttons {
@@ -2150,6 +2235,19 @@ a {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--accent-color);
+}
+
+/* Typing Animation Cursor */
+.typing-cursor {
+    color: var(--secondary-color);
+    font-weight: normal;
+    animation: blink-cursor 1s infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink-cursor {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
 }
 
 /* Selection */
