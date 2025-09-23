@@ -376,9 +376,15 @@ function initializeCounters() {
     });
 }
 
-// Contact Form
+// Contact Form with EmailJS
 function initializeContactForm() {
     const contactForm = document.getElementById('contact-form');
+    
+    // Initialize EmailJS with your public key
+    // TODO: Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS public key
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init('YOUR_PUBLIC_KEY');
+    }
     
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -402,20 +408,45 @@ function initializeContactForm() {
                 return;
             }
             
-            // Simulate form submission
+            // Prepare template parameters
+            const templateParams = {
+                from_name: name,
+                from_email: email,
+                subject: subject,
+                message: message,
+                to_name: 'Vivek Gupta'
+            };
+            
             const submitButton = contactForm.querySelector('button[type="submit"]');
             const originalText = submitButton.innerHTML;
             
             submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             submitButton.disabled = true;
             
-            // Simulate API call
-            setTimeout(() => {
-                showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
-                contactForm.reset();
+            // Check if EmailJS is available
+            if (typeof emailjs === 'undefined') {
+                showNotification('Email service is not available. Please try again later.', 'error');
                 submitButton.innerHTML = originalText;
                 submitButton.disabled = false;
-            }, 2000);
+                return;
+            }
+            
+            // Send email using EmailJS
+            // TODO: Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual IDs
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    console.log('Email sent successfully:', response);
+                    showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
+                    contactForm.reset();
+                })
+                .catch(function(error) {
+                    console.error('Email sending failed:', error);
+                    showNotification('Failed to send message. Please try again or contact me directly.', 'error');
+                })
+                .finally(function() {
+                    submitButton.innerHTML = originalText;
+                    submitButton.disabled = false;
+                });
         });
     }
 }

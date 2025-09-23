@@ -109,8 +109,8 @@ class PortfolioLoader {
                     "technologies": ["React", "Redux", "Redux-Saga", "Firebase", "Stripe API", "GraphQL", "Context API", "Hooks"],
                     "image": "assets/crwn-website.png",
                     "thumbnail": "img/portfolio/thumbnails/crwn-square.png",
-                    "liveDemo": "https://crwn-clothing-hub.herokuapp.com/",
-                    "github": "https://github.com/vg4838/crwn-clothing",
+                    "liveDemo": "https://crwn-clothing-vivek-app.netlify.app/",
+                    "github": "https://github.com/vg4838/crwn-clothing-v2",
                     "certificate": "https://udemy-certificate.s3.amazonaws.com/image/UC-23bbf909-b324-44d3-823b-0443dc752a92.jpg",
                     "category": "web"
                 },
