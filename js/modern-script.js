@@ -381,9 +381,8 @@ function initializeContactForm() {
     const contactForm = document.getElementById('contact-form');
     
     // Initialize EmailJS with your public key
-    // TODO: Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS public key
     if (typeof emailjs !== 'undefined') {
-        emailjs.init('YOUR_PUBLIC_KEY');
+        emailjs.init('mcBmzJIQbimZnpXFp');
     }
     
     if (contactForm) {
@@ -408,10 +407,10 @@ function initializeContactForm() {
                 return;
             }
             
-            // Prepare template parameters
+            // Prepare template parameters to match your EmailJS template
             const templateParams = {
-                from_name: name,
-                from_email: email,
+                name: name,
+                email: email,
                 subject: subject,
                 message: message,
                 to_name: 'Vivek Gupta'
@@ -431,9 +430,10 @@ function initializeContactForm() {
                 return;
             }
             
-            // Send email using EmailJS
-            // TODO: Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual IDs
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+            // Send email using EmailJS with detailed error handling
+            console.log('Attempting to send email with params:', templateParams);
+            
+            emailjs.send('service_shwskds', 'template_6qc459r', templateParams)
                 .then(function(response) {
                     console.log('Email sent successfully:', response);
                     showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
@@ -441,7 +441,23 @@ function initializeContactForm() {
                 })
                 .catch(function(error) {
                     console.error('Email sending failed:', error);
-                    showNotification('Failed to send message. Please try again or contact me directly.', 'error');
+                    console.error('Error details:', error.text || error.message || error);
+                    
+                    // More specific error messages
+                    let errorMessage = 'Failed to send message. ';
+                    if (error.status === 400) {
+                        errorMessage += 'Invalid request. Please check your input.';
+                    } else if (error.status === 401) {
+                        errorMessage += 'Authentication failed. Please contact the site owner.';
+                    } else if (error.status === 403) {
+                        errorMessage += 'Service access denied. Please contact the site owner.';
+                    } else if (error.status === 404) {
+                        errorMessage += 'Email service not found. Please contact the site owner.';
+                    } else {
+                        errorMessage += 'Please try again or contact me directly at vivekgupta50455@gmail.com';
+                    }
+                    
+                    showNotification(errorMessage, 'error');
                 })
                 .finally(function() {
                     submitButton.innerHTML = originalText;
