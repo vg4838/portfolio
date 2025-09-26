@@ -58,7 +58,7 @@ class PortfolioLoader {
             "experience": [
                 {
                     "company": "Amazon",
-                    "period": "2022-Present",
+                    "period": "July 2022 - Present",
                     "description": "Enhanced recommendation strategies for book series use cases and launched end-to-end features including bulk book purchasing and audiobook purchase capabilities on series pages.",
                     "links": [
                         {
@@ -73,7 +73,7 @@ class PortfolioLoader {
                 },
                 {
                     "company": "Skillz",
-                    "period": "2021",
+                    "period": "Aug - Dec 2021",
                     "description": "Developed core features for competitive mobile gaming platform's developer console including analytics dashboards, learning center, and Role-Based Access Control (RBAC) systems",
                     "links": [
                         {
@@ -84,19 +84,25 @@ class PortfolioLoader {
                 },
                 {
                     "company": "Datacore Software",
-                    "period": "2021",
+                    "period": "May - Aug 2021",
                     "description": "Built ETL pipelines and analytics dashboards for enterprise bug tracking systems",
                     "links": []
                 },
                 {
                     "company": "Rochester Institute of Technology",
-                    "period": "2021",
-                    "description": "Built web-based data science learning platform enabling non-technical users to perform data mining tasks without coding",
-                    "links": []
+                    "period": "Jan - May 2021",
+                    "description": "Built DSLP (Data Science Learning Platform), a comprehensive web-based learning platform designed for students with little to no programming experience. The platform features a user-friendly dashboard, interactive data science modules, code exemplification in Python and R, self-assessment capabilities, and a code sandbox environment enabling hands-on data science practice across various application domains.",
+                    "designImage": "assets/DSLP.svg",
+                    "links": [
+                        {
+                            "title": "DSLP Platform",
+                            "url": "http://vclient4.cs.rit.edu:8000/"
+                        }
+                    ]
                 },
                 {
                     "company": "BNP Paribas",
-                    "period": "2016-2019",
+                    "period": "June 2016 - July 2019",
                     "description": "Optimized automation testing frameworks and developed reusable java API libraries",
                     "links": []
                 }
@@ -108,6 +114,7 @@ class PortfolioLoader {
                     "description": "Full-stack clothing e-commerce web application with add to cart, checkout features, Firebase authentication, and Stripe payment gateway.",
                     "technologies": ["React", "Redux", "Redux-Saga", "Firebase", "Stripe API", "GraphQL", "Context API", "Hooks"],
                     "image": "assets/crwn-website.png",
+                    "designImage": "assets/crwn_clothing_desing.svg",
                     "thumbnail": "img/portfolio/thumbnails/crwn-square.png",
                     "liveDemo": "https://crwn-clothing-vivek-app.netlify.app/",
                     "github": "https://github.com/vg4838/crwn-clothing-v2",
@@ -121,7 +128,7 @@ class PortfolioLoader {
                     "technologies": ["React", "Redux", "Docker", "CircleCI", "Terraform", "AWS CloudFront", "S3", "Slack Integration"],
                     "image": "img/portfolio/movie.png",
                     "thumbnail": "img/portfolio/thumbnails/movie-square.png",
-                    "liveDemo": "https://d10jggv8zyjv7v.cloudfront.net/",
+                    "liveDemo": "",
                     "github": "https://github.com/vg4838/bnge-watch",
                     "certificate": "assets/circleci_certificate.jpg",
                     "category": "web"
@@ -187,10 +194,10 @@ class PortfolioLoader {
                 }
             ],
             "skills": {
-                "cloudTechnologies": ["AWS Lambda", "AWS S3", "AWS EC2", "Docker", "Kubernetes", "Terraform", "CircleCI", "Jenkins"],
+                "cloudTechnologies": ["AWS Lambda", "AWS S3", "AWS EC2", "Docker", "Terraform", "CircleCI", "Jenkins"],
                 "languages": ["Java", "Python", "JavaScript", "TypeScript", "SQL"],
                 "frontend": ["React", "Redux", "HTML5", "CSS3", "Angular"],
-                "backend": ["Node.js", "Flask", "Django", "RESTful APIs", "Spring Boot", "Stripe API"],
+                "backend": ["Node.js", "Flask", "Spring Boot", "Stripe API"],
                 "machineLearning": ["TensorFlow", "PyTorch", "Scikit-learn", "Pandas", "NumPy", "Jupyter"],
                 "databases": ["PostgreSQL", "MongoDB", "MySQL", "DynamoDB", "Redis", "Elasticsearch"]
             },
@@ -308,16 +315,20 @@ class PortfolioLoader {
                             <span class="work-period">${exp.period}</span>
                         </div>
                         <p class="work-description">${exp.description}</p>
-                        ${exp.links.length > 0 ? `
-                            <div class="work-links">
-                                ${exp.links.map(link => `
-                                    <a href="${link.url}" class="work-link" target="_blank" rel="noopener noreferrer">
-                                        <i class="fas fa-external-link-alt"></i>
-                                        ${link.title}
-                                    </a>
-                                `).join('')}
-                            </div>
-                        ` : ''}
+                        <div class="work-links">
+                            ${exp.links.map(link => `
+                                <a href="${link.url}" class="work-link" target="_blank" rel="noopener noreferrer">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    ${link.title}
+                                </a>
+                            `).join('')}
+                            ${exp.designImage ? `
+                                <a href="#" class="work-link" onclick="openDesignModal('${exp.designImage}', '${exp.company}', 'work')" title="View Design">
+                                    <i class="fas fa-palette"></i>
+                                    View Design
+                                </a>
+                            ` : ''}
+                        </div>
                     </div>
                 </div>
             `).join('');
@@ -353,11 +364,16 @@ class PortfolioLoader {
                                                 <i class="fab fa-github"></i>
                                             </a>
                                         ` : ''}
-                                        ${item.certificate ? `
-                                            <a href="${item.certificate}" class="project-link" data-tooltip="Certificate" target="_blank" rel="noopener noreferrer">
-                                                <i class="fas fa-certificate"></i>
-                                            </a>
-                                        ` : ''}
+                        ${item.certificate ? `
+                            <a href="${item.certificate}" class="project-link" data-tooltip="Certificate" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-certificate"></i>
+                            </a>
+                        ` : ''}
+                        ${item.designImage ? `
+                            <a href="#" class="project-link" data-tooltip="View Design" onclick="openDesignModal('${item.designImage}', '${item.title}')">
+                                <i class="fas fa-palette"></i>
+                            </a>
+                        ` : ''}
                                     </div>
                                 </div>
                             </div>

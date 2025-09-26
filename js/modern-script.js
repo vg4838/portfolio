@@ -670,6 +670,112 @@ window.addEventListener('error', function(e) {
     console.warn('Portfolio script error:', e.message);
 });
 
+// Design Modal Functions
+let modalSource = 'projects'; // Track where the modal was opened from
+
+function openDesignModal(imagePath, title, source = 'projects') {
+    // Create modal if it doesn't exist
+    let modal = document.getElementById('design-modal');
+    if (!modal) {
+        modal = createDesignModal();
+        document.body.appendChild(modal);
+    }
+    
+    // Store the source for proper navigation on close
+    modalSource = source;
+    
+    // Update modal content
+    const modalTitle = modal.querySelector('.design-modal-title');
+    const modalBody = modal.querySelector('.design-modal-body');
+    
+    if (modalTitle) {
+        modalTitle.innerHTML = `<i class="fas fa-palette"></i> ${title} - Design`;
+    }
+    
+    // Show loading state
+    modalBody.innerHTML = `
+        <div class="design-modal-loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            Loading design...
+        </div>
+    `;
+    
+    // Show modal
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Load design image at natural size
+    setTimeout(() => {
+        modalBody.innerHTML = `
+            <div class="design-modal-svg-container">
+                <img src="${imagePath}" alt="${title} Design" class="design-modal-svg" />
+            </div>
+        `;
+    }, 100);
+}
+
+function closeDesignModal() {
+    const modal = document.getElementById('design-modal');
+    if (modal) {
+        modal.classList.add('closing');
+        
+        setTimeout(() => {
+            modal.classList.remove('active', 'closing');
+            document.body.style.overflow = '';
+            // No scrolling - stay at current position
+        }, 300);
+    }
+}
+
+function createDesignModal() {
+    const modal = document.createElement('div');
+    modal.id = 'design-modal';
+    modal.className = 'design-modal';
+    
+    modal.innerHTML = `
+        <div class="design-modal-content">
+            <div class="design-modal-header">
+                <h3 class="design-modal-title">
+                    <i class="fas fa-palette"></i>
+                    Design Preview
+                </h3>
+                <button class="design-modal-close" onclick="closeDesignModal()" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="design-modal-body">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    `;
+    
+    // Close modal when clicking outside
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeDesignModal();
+        }
+    });
+    
+    return modal;
+}
+
+// Keyboard navigation for modal
+document.addEventListener('keydown', function(e) {
+    // ESC key to close mobile menu
+    if (e.key === 'Escape') {
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        const designModal = document.getElementById('design-modal');
+        
+        if (hamburger && hamburger.classList.contains('active')) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        } else if (designModal && designModal.classList.contains('active')) {
+            closeDesignModal();
+        }
+    }
+});
+
 // Console welcome message
 console.log(`
 🚀 Welcome to Vivek Gupta's Portfolio!
